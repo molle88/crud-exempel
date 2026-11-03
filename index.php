@@ -2,7 +2,7 @@
 
     require_once "header.php";
 
-    if(isset($_POST['submit-book'])) {
+    if(isset($_POST['submit-movie'])) {
         $title = $_POST['title'];
         $date = $_POST['date'];
         $category = $_POST['category'];
