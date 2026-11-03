@@ -16,6 +16,16 @@
         }
     }
 
+    if(isset($_GET['delete']) && $_GET['delete'] === 'true' && isset($_GET['id'])) {
+        $movieIdToDelete = $_GET['id'];
+       if(deleteMovie($pdo, $movieIdToDelete)) {
+            $feedbackMessage = ["success", "Filmen har tagits bort!"];
+        } else {
+            $feedbackMessage = ["error", "Något gick fel. Filmen kunde inte tas bort."];
+        }
+        
+    }
+
     $allMovies = getAllMovies($pdo);
 	
 	?>
@@ -68,7 +78,7 @@
             echo "<p class='card-text'>Kategori: " . htmlspecialchars($movie['kategori']) . "</p>";
             echo "<p class='card-text'>Beskrivning: " . htmlspecialchars($movie['beskrivning']) . "</p>";
             echo "<a href='edit.php?id=" . $movie['id'] . "' class='btn btn-warning me-2'>Redigera</a>";
-            echo "<a href='delete.php?id=" . $movie['id'] . "' class='btn btn-danger' onclick=\"return confirm('Är du säker på att du vill ta bort denna film?');\">Ta bort</a>";
+            echo "<a href='?delete=true&id=" . $movie['id'] . "' class='btn btn-danger' onclick=\"return confirm('Är du säker på att du vill ta bort denna film?');\">Ta bort</a>";
             echo "</div>";
             echo "</div>";
         }

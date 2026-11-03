@@ -50,4 +50,17 @@ function updateMovie($pdo, $id, $title, $date, $category, $description) {
     }
 }
 
+function deleteMovie($pdo, $id) {
+    try {
+        $sql = "DELETE FROM sedda_filmer WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return true;
+    } catch (PDOException $e) {
+        //Här kanske vi skulle skriva errorn till loggen istället, så att inte användaren ser den tekniska datanecho 
+        //echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
 ?>
